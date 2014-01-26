@@ -43,3 +43,19 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+
+#gems for testing
+group :development, :test do
+  gem "rspec-rails"
+  gem 'guard-rspec', require: false
+  gem 'rspec-nc'
+  gem 'fuubar'
+  gem 'terminal-notifier-guard'
+  gem 'ruby-prof'
+end
+
+#gems for error display
+group :development do
+  #gem "better_errors"
+end
