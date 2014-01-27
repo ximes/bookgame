@@ -55,6 +55,7 @@ end
 #gems for testing
 group :development, :test do
   gem "rspec-rails"
+  gem "factory_girl_rails"
   gem 'guard-rspec', require: false
   gem 'rspec-nc'
   gem 'fuubar'
