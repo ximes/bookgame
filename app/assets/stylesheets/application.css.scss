@@ -11,3 +11,13 @@
  *= require_self
  *= require_tree .
  */
+
+ @import "bootswatch/slate/variables";
+ @import "bootstrap";
+
+ @import "bootstrap-responsive";
+ @import "bootswatch/slate/bootswatch";
+
+ body{
+ 	padding-top: 100px;
+ }

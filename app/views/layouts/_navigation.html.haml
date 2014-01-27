@@ -1,0 +1,26 @@
+.navbar.navbar-fixed-top
+ .navbar-inner
+  .container
+   %a.brand 
+    Bookgame
+   <a class="brand btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+   %span.icon-bar
+   %span.icon-bar
+   %span.icon-bar
+   </a>
+   .nav-collapse.collapse#main-menu
+    %ul.nav.pull-right
+     - unless user_signed_in?
+      %li 
+       = link_to "Entra", new_user_session_path
+      %li
+       = link_to "Registrati", new_user_registration_path
+     - else
+      %li
+       = link_to edit_user_registration_path do
+        %i.icon-wrench
+        Impostazioni
+      %li
+       = link_to destroy_user_session_path, :method => "DELETE" do
+        %i.icon-off
+        Esci
