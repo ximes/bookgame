@@ -17,6 +17,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'devise'
 
+gem 'mysql2'
+
 gem 'haml'
 
 gem 'bootstrap-sass', '~> 2.3.1.3'
