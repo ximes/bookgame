@@ -61,6 +61,7 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'rspec-nc'
   gem 'fuubar'
+  gem 'shoulda-matchers'
   gem 'terminal-notifier-guard'
   gem 'ruby-prof'
 end
