@@ -1,4 +1,6 @@
 Bookgame::Application.routes.draw do
+  resources :chapters
+
   devise_for :users
   resources :books
 

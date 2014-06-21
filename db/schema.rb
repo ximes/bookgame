@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140202080746) do
+ActiveRecord::Schema.define(version: 20140621233422) do
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -24,6 +24,21 @@ ActiveRecord::Schema.define(version: 20140202080746) do
     t.integer "user_id"
     t.integer "book_id"
   end
+
+  create_table "chapters", force: true do |t|
+    t.string   "title"
+    t.text     "introtext"
+    t.text     "fulltext"
+    t.boolean  "active"
+    t.boolean  "death"
+    t.boolean  "ending"
+    t.boolean  "beginning"
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "chapters", ["book_id"], name: "index_chapters_on_book_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
