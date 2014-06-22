@@ -17,3 +17,9 @@
 // Loads all Bootstrap javascripts
 //= require bootstrap
 //= require cocoon
+//= require jquery.autogrowtextarea
+
+$(document).ready(function() {
+	$("textarea").autoGrow();
+	$('a[data-popup]').click(function(e) { window.open($(this).attr('href'),'','height=600, scrollbars=1'); e.preventDefault(); });
+});

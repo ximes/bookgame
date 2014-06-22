@@ -21,6 +21,8 @@ gem 'mysql2'
 
 gem 'haml'
 
+gem "d3-rails"
+
 gem "cocoon"
 
 gem "paperclip", "~> 4.1"
@@ -31,8 +33,15 @@ gem 'bootswatch-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'paper_trail', '~> 3.0.2'
+
+gem 'cancan'
+gem 'cancan_strong_parameters'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+gem 'autogrow-textarea-rails', '~> 3.1.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'

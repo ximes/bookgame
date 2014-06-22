@@ -1,4 +1,5 @@
 class ChaptersController < ApplicationController
+  load_and_authorize_resource :chapter, :only => [:index, :show]
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
   before_action :set_book
 
@@ -11,6 +12,10 @@ class ChaptersController < ApplicationController
   # GET /chapters/1
   # GET /chapters/1.json
   def show
+  end
+
+  def map
+    @chapters = @book.chapters
   end
 
   # GET /chapters/new

@@ -5,6 +5,8 @@ Bookgame::Application.routes.draw do
   resources :books do
    resources :chapters
   end
+
+  match 'book/:book_id/chapters/map' => 'chapters#map', :via => :get, :as => :book_chapters_map
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
