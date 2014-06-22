@@ -1,11 +1,16 @@
 class BooksController < ApplicationController
+  load_and_authorize_resource :book, :only => [:index, :show]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if can?(:manage, :all)
+      @books = Book.all
+    else
+      @books = current_user.books.all
+    end
   end
 
   # GET /books/1

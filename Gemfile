@@ -33,6 +33,9 @@ gem 'bootswatch-rails'
 
 gem 'paper_trail', '~> 3.0.2'
 
+gem 'cancan'
+gem 'cancan_strong_parameters'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 

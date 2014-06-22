@@ -1,4 +1,5 @@
 class ChaptersController < ApplicationController
+  load_and_authorize_resource :chapter, :only => [:index, :show]
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
   before_action :set_book
 
