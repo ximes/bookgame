@@ -1,7 +1,7 @@
 .navbar.navbar-fixed-top
  .navbar-inner
   .container
-   %a.brand 
+   %a.brand{:href => root_path}
     Bookgame
    <a class="brand btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
    %span.icon-bar
@@ -9,17 +9,22 @@
    %span.icon-bar
    </a>
    .nav-collapse.collapse#main-menu
+    %ul.nav
+     %li
+      = link_to "Books", books_path
+     %li
+      = link_to "Chapters", chapters_path
     %ul.nav.pull-right
      - unless user_signed_in?
       %li 
-       = link_to "Entra", new_user_session_path
+       = link_to "Login", new_user_session_path
       %li
-       = link_to "Registrati", new_user_registration_path
+       = link_to "Sign up", new_user_registration_path
      - else
       %li
        = link_to edit_user_registration_path do
         %i.icon-wrench
-        Impostazioni
+        Settings
       %li
        = link_to destroy_user_session_path, :method => "DELETE" do
         %i.icon-off

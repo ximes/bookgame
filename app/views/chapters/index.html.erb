@@ -1,15 +1,13 @@
 <h1>Listing chapters</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
-      <th>Introtext</th>
-      <th>Fulltext</th>
       <th>Active</th>
-      <th>Death</th>
-      <th>Ending</th>
       <th>Beginning</th>
+      <th>Ending</th>
+      <th>Death</th>
       <th>Book</th>
       <th></th>
       <th></th>
@@ -21,13 +19,11 @@
     <% @chapters.each do |chapter| %>
       <tr>
         <td><%= chapter.title %></td>
-        <td><%= chapter.introtext %></td>
-        <td><%= chapter.fulltext %></td>
         <td><%= chapter.active %></td>
-        <td><%= chapter.death %></td>
-        <td><%= chapter.ending %></td>
         <td><%= chapter.beginning %></td>
-        <td><%= chapter.book %></td>
+        <td><%= chapter.ending %></td>
+        <td><%= chapter.death %></td>
+        <td><%= chapter.book.title %></td>
         <td><%= link_to 'Show', chapter %></td>
         <td><%= link_to 'Edit', edit_chapter_path(chapter) %></td>
         <td><%= link_to 'Destroy', chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
