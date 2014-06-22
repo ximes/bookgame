@@ -4,6 +4,8 @@
   <strong>Title:</strong>
   <%= @book.title %>
 </p>
-
+<p>
+<%= image_tag @book.cover.url(:medium) %>
+</p>
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
