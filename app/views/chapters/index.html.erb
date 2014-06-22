@@ -10,28 +10,23 @@
       <th>Death</th>
       <th>Book</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @chapters.each do |chapter| %>
       <tr>
-        <td><%= chapter.title %></td>
+        <td><%= link_to chapter.title, edit_book_chapter_path(@book, chapter) %></td>
         <td><%= chapter.active %></td>
         <td><%= chapter.beginning %></td>
         <td><%= chapter.ending %></td>
         <td><%= chapter.death %></td>
         <td><%= chapter.book.title %></td>
-        <td><%= link_to 'Show', chapter %></td>
-        <td><%= link_to 'Edit', edit_chapter_path(chapter) %></td>
-        <td><%= link_to 'Destroy', chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', book_chapter_path(@book, chapter), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Chapter', new_chapter_path %>
+<%= link_to 'New Chapter', new_book_chapter_path(@book) %>

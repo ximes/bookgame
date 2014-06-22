@@ -16,5 +16,5 @@
 /tmp
 
 # Ignore images.
-/public/images/*.*
-/public/system/*.*
+/public/images/*
+/public/system/*

@@ -1,10 +1,11 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
+  before_action :set_book
 
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = Chapter.all
+    @chapters = @book.chapters
   end
 
   # GET /chapters/1
@@ -15,6 +16,7 @@ class ChaptersController < ApplicationController
   # GET /chapters/new
   def new
     @chapter = Chapter.new
+    @chapter.book = @book
   end
 
   # GET /chapters/1/edit
@@ -28,7 +30,7 @@ class ChaptersController < ApplicationController
 
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to @chapter, notice: 'Chapter was successfully created.' }
+        format.html { redirect_to book_chapters_path(@book, @chapter), notice: 'Chapter was successfully created.' }
         format.json { render action: 'show', status: :created, location: @chapter }
       else
         format.html { render action: 'new' }
@@ -42,7 +44,7 @@ class ChaptersController < ApplicationController
   def update
     respond_to do |format|
       if @chapter.update(chapter_params)
-        format.html { redirect_to @chapter, notice: 'Chapter was successfully updated.' }
+        format.html { redirect_to book_chapters_path(@book, @chapter), notice: 'Chapter was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -56,7 +58,7 @@ class ChaptersController < ApplicationController
   def destroy
     @chapter.destroy
     respond_to do |format|
-      format.html { redirect_to chapters_url }
+      format.html { redirect_to book_chapters_path(@book, @chapter) }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class ChaptersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_chapter
       @chapter = Chapter.find(params[:id])
+      @book = Book.find(params[:book_id])
+    end
+    def set_book
+      @book = Book.find(params[:book_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

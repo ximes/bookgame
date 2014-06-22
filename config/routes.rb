@@ -1,9 +1,10 @@
 Bookgame::Application.routes.draw do
-  resources :chapters
 
   devise_for :users
-  resources :books
-
+  
+  resources :books do
+   resources :chapters
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,4 +1,5 @@
-<%= form_for(@chapter) do |f| %>
+<%=
+ form_for([@book, @chapter] ) do |f| %>
   <% if @chapter.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@chapter.errors.count, "error") %> prohibited this chapter from being saved:</h2>
@@ -39,10 +40,7 @@
     <%= f.label :beginning %><br>
     <%= f.check_box :beginning %>
   </div>
-  <div class="field">
-    <%= f.label :book_id %><br>
-    <%= f.select(:book_id, Book.all.collect {|p| [p.title, p.id]}, include_blank: true ) %>
-  </div>
+  <%= f.hidden_field :book_id %>
   <hr />
   <div id="parents">
     <% @chapter.parent_chapters.each do |parent_field| %>
