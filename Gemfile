@@ -31,6 +31,8 @@ gem 'bootswatch-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'paper_trail', '~> 3.0.2'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 

@@ -5,6 +5,8 @@ class Chapter < ActiveRecord::Base
 #  scope :users, -> { where(type: "User") }
 
 #  set_primary_key "chapter_id"
+	has_paper_trail
+
 	belongs_to :book
 
 	has_many :parent_chapters, :foreign_key => 'chapter_id', :class_name => 'Chaptership'
