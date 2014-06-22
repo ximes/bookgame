@@ -21,6 +21,8 @@ gem 'mysql2'
 
 gem 'haml'
 
+gem "d3-rails"
+
 gem "cocoon"
 
 gem "paperclip", "~> 4.1"

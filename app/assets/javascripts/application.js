@@ -20,5 +20,6 @@
 //= require jquery.autogrowtextarea
 
 $(document).ready(function() {
-$("textarea").autoGrow();
+	$("textarea").autoGrow();
+	$('a[data-popup]').click(function(e) { window.open($(this).attr('href'),'','height=600, scrollbars=1'); e.preventDefault(); });
 });

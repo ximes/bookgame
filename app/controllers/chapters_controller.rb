@@ -14,6 +14,10 @@ class ChaptersController < ApplicationController
   def show
   end
 
+  def map
+    @chapters = @book.chapters
+  end
+
   # GET /chapters/new
   def new
     @chapter = Chapter.new

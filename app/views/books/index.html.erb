@@ -8,7 +8,7 @@
     <ul>
       <li><%= link_to "Edit Book Details", edit_book_path(book) %></li>
       <li><%= link_to 'View Chapters', book_chapters_path(book) %></li>
-      <li>View Chapters on a Map</li>
+      <li><%= link_to "View Chapters on a Map", book_chapters_map_path(book), 'data-popup' => true %></li>
       <li><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></li>
     </ul>
   </div>
