@@ -41,7 +41,19 @@
   </div>
   <div class="field">
     <%= f.label :book_id %><br>
-    <%= f.text_field :book_id %>
+    <%= f.select(:book_id, Book.all.collect {|p| [p.title, p.id]}, include_blank: true ) %>
+  </div>
+  <hr />
+  <div id="parents">
+    <% @chapter.parent_chapters.each do |parent_field| %>
+      <%= f.fields_for :parent_chapters, parent_field do |parent| %>
+        <% render 'parent_fields', :f => parent
+        %>
+      <% end %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add a new parent Chapter', f, :parent_chapters, :partial => "parent_fields" %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>

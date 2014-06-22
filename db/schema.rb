@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621233422) do
+ActiveRecord::Schema.define(version: 20140622074803) do
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -38,7 +38,13 @@ ActiveRecord::Schema.define(version: 20140621233422) do
     t.datetime "updated_at"
   end
 
-  add_index "chapters", ["book_id"], name: "index_chapters_on_book_id", using: :btree
+  create_table "chapterships", force: true do |t|
+    t.integer "chapter_id"
+    t.integer "parent_id"
+  end
+
+  add_index "chapterships", ["chapter_id"], name: "index_chapterships_on_chapter_id", using: :btree
+  add_index "chapterships", ["parent_id"], name: "index_chapterships_on_parent_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

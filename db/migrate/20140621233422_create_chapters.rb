@@ -8,7 +8,7 @@ class CreateChapters < ActiveRecord::Migration
       t.boolean :death
       t.boolean :ending
       t.boolean :beginning
-      t.references :book, index: true
+      t.references :book
       t.timestamps
     end
   end

@@ -21,6 +21,8 @@ gem 'mysql2'
 
 gem 'haml'
 
+gem "cocoon"
+
 gem 'bootstrap-sass', '~> 2.3.1.3'
 gem 'bootswatch-rails'
 
