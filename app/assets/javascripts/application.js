@@ -17,3 +17,8 @@
 // Loads all Bootstrap javascripts
 //= require bootstrap
 //= require cocoon
+//= require jquery.autogrowtextarea
+
+$(document).ready(function() {
+$("textarea").autoGrow();
+});

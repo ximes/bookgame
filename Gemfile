@@ -39,6 +39,8 @@ gem 'cancan_strong_parameters'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'autogrow-textarea-rails', '~> 3.1.0'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
