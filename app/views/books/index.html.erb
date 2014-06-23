@@ -1,30 +1,40 @@
 <h1>Listing books</h1>
 
-<% @books.each do |book| %>
-  <div class="<%= "success" if book.active %>">
-    <h3><%= link_to book.title, edit_book_path(book) %></h3>
-    <p><%= link_to image_tag(book.cover.url(:thumb)), edit_book_path(book) %></p>
-    <ul>
-      <li><%= link_to 'View Book Public Page', book_view_path(book) %></li>
-      <li><%= link_to 'Download Book in pdf', book_download_path(book) %></li>
-      <li><%= link_to "Edit Book Details", edit_book_path(book) %></li>
-      <li><%= link_to 'View Chapters', book_chapters_path(book) %></li>
-      <li><%= link_to "View Chapters on a Map", book_chapters_map_path(book), 'data-popup' => true %></li>
-      <li><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-    </ul>
+<div class="page-actions">
+  <%= link_to 'New Book', new_book_path %>
+</div>
+
+<div class="container books">
+  <div class="row">
+    <% @books.each do |book| %>
+      <div class="book span4 <%= "success" if book.active %>">
+        <h3><%= link_to book.title, edit_book_path(book) %></h3>
+        <p class="image"><%= link_to image_tag(book.cover.url(:medium)), edit_book_path(book) %></p>
+        <ul>
+          <li><%= link_to 'View Book Public Page', book_view_path(book) %></li>
+          <li><%= link_to 'Download Book in pdf', book_download_path(book) %></li>
+          <li><%= link_to "Edit Book Details", edit_book_path(book) %></li>
+          <li><%= link_to 'View Chapters', book_chapters_path(book) %></li>
+          <li><%= link_to "View Chapters on a Map", book_chapters_map_path(book), 'data-popup' => true %></li>
+          <li><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+        </ul>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
 
 <% unless @other_books.empty? %>
 <h1>Books from your neighbours</h1>
-
-<% @other_books.each do |book| %>
-  <div>
-    <h3><%= link_to book.title, book_view_path(book) %></h3>
-    <p><%= link_to image_tag(book.cover.url(:thumb)), book_view_path(book) %></p>
+<div class="container books">
+  <div class="row">
+    <% @other_books.each do |book| %>
+      <div class="book span4">
+        <h3><%= link_to book.title, book_view_path(book) %></h3>
+        <p><%= link_to image_tag(book.cover.url(:thumb)), book_view_path(book) %></p>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
 
 <br>
 <% end %>
-<%= link_to 'New Book', new_book_path %>

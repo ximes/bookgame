@@ -1,6 +1,11 @@
 <h1>Listing chapters</h1>
 
-<table class="table">
+<div class="page-actions">
+<%= link_to 'New Chapter', new_book_chapter_path(@book) %>
+<%= link_to "View Chapters on a Map", book_chapters_map_path(@book), 'data-popup' => true %>
+</div>
+
+<table class="table chapters">
   <thead>
     <tr>
       <th>Title</th>
@@ -27,7 +32,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-<%= link_to 'New Chapter', new_book_chapter_path(@book) %>
-<%= link_to "View Chapters on a Map", book_chapters_map_path(@book), 'data-popup' => true %>

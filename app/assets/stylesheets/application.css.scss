@@ -12,12 +12,22 @@
  *= require_tree .
  */
 
- @import "bootswatch/slate/variables";
+ @import "bootswatch/cosmo/variables";
  @import "bootstrap";
 
  @import "bootstrap-responsive";
- @import "bootswatch/slate/bootswatch";
+ @import "bootswatch/cosmo/bootswatch";
 
  body{
  	padding-top: 100px;
+ }
+ .page-actions{
+ 	border-bottom:1px solid #bbb;
+ 	padding:10px;
+ 	color:#000;
+ 	text-align:right;
+	margin-bottom:20px;
+ }
+ .page-actions a{
+ 	color:#000;
  }
