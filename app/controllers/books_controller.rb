@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   load_and_authorize_resource :book, :only => [:index, :show]
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :view]
-  before_filter :authenticate_user!
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :view, :download]
+  before_filter :authenticate_user!, :except => [:view, :download]
 
   # GET /books
   # GET /books.json
@@ -21,6 +21,19 @@ class BooksController < ApplicationController
 
   def view
     @comments = @book.comments.recent.limit(10).all
+  end
+
+  def download
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => "#{@book.title}",
+               :disposition                    => 'attachment',
+               :layout                         => 'pdf.html'
+              #:cover                          => Rails.root + @book.cover.url(:hi_res),
+               #:header => { :right => '[page] of [topage]' },
+      end
+    end
   end
 
   # GET /books/new

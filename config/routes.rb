@@ -8,13 +8,14 @@ Bookgame::Application.routes.draw do
 
   match 'book/:book_id/chapters/map' => 'chapters#map', :via => :get, :as => :book_chapters_map
   match 'book/:id/view' => 'books#view', :via => :get, :as => :book_view
+  match 'book/:id/download' => 'books#download', :via => :get, :as => :book_download
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root 'books#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

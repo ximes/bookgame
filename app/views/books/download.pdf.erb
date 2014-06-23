@@ -1,0 +1,5 @@
+<h1><%= @book.title %></h1>
+<% @book.chapters.each{|chapter| %>
+	<h2><%= chapter.title %></h2>
+	<%= chapter.fulltext %>
+<%	} %>

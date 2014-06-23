@@ -31,14 +31,17 @@ class Ability
 
     def initialize(user)
         user ||= User.new # guest user (not logged in)
+        
+        cannot [:view], [Comment]
+        can [:read, :download], [Book] do |b|
+            b.publishable?
+        end
+
         if user.admin? # Admin user
             can :manage, :all
         else # Non-admin user
             
             #Book abilities
-            can [:read], [Book] do |b|
-                b.publishable?
-            end
             can [:manage, :create], [Book] do |b|
                 b.users.include?(user)
             end
@@ -46,6 +49,7 @@ class Ability
             can [:manage, :create], [Chapter] do |c|
                 c.book.users.include?(user)
             end
+
         end
     end
 
