@@ -27,6 +27,8 @@ gem "cocoon"
 
 gem "paperclip", "~> 4.1"
 
+gem 'acts_as_commentable'
+
 gem 'bootstrap-sass', '~> 2.3.1.3'
 gem 'bootswatch-rails'
 

@@ -40,7 +40,7 @@ class Ability
                 b.publishable?
             end
             can [:manage, :create], [Book] do |b|
-                #b.users.include?(user)
+                b.users.include?(user)
             end
             #Chapter abilities
             can [:manage, :create], [Chapter] do |c|

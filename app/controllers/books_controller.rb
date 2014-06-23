@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource :book, :except => [:view]
+  load_and_authorize_resource :book, :only => [:index, :show]
   before_action :set_book, only: [:show, :edit, :update, :destroy, :view]
   before_filter :authenticate_user!
 
@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     if can?(:manage, :all)
       @books = Book.all
     else
-      @books = current_user.books.all
+      @books = Book.owned_by(current_user)
       @other_books = Book.publishable - @books
     end
   end
@@ -20,6 +20,7 @@ class BooksController < ApplicationController
   end
 
   def view
+    @comments = @book.comments.recent.limit(10).all
   end
 
   # GET /books/new
@@ -39,8 +40,8 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to books_url, notice: 'Book was successfully created.' }
-        format.json { render action: 'index', status: :created, location: books_url }
+        format.html { redirect_to book_url(@book), notice: 'Book was successfully created.' }
+        format.json { render action: 'index', status: :created, location: book_url(@book) }
       else
         format.html { render action: 'new' }
         format.json { render json: @book.errors, status: :unprocessable_entity }
@@ -53,7 +54,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to books_url, notice: 'Book was successfully updated.' }
+        format.html { redirect_to book_url(@book), notice: 'Book was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

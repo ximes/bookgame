@@ -8,3 +8,10 @@
 <%= image_tag @book.cover.url(:medium) %>
 </p>
 <%= link_to 'Back', books_path %>
+
+<hr />
+<h2>Comments</h2>
+<% @book.comments.each{|comment| %>
+	<h3><%= comment.title %></h3>
+<%	} %>
+<%= link_to 'Back', books_path %>
