@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622182728) do
+ActiveRecord::Schema.define(version: 20140623071753) do
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140622182728) do
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
+    t.boolean  "publishable",        default: false
   end
 
   create_table "books_users", id: false, force: true do |t|

@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource :book, :only => [:index, :show]
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource :book, :except => [:view]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :view]
   before_filter :authenticate_user!
 
   # GET /books
@@ -10,12 +10,16 @@ class BooksController < ApplicationController
       @books = Book.all
     else
       @books = current_user.books.all
+      @other_books = Book.publishable - @books
     end
   end
 
   # GET /books/1
   # GET /books/1.json
   def show
+  end
+
+  def view
   end
 
   # GET /books/new

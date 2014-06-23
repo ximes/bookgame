@@ -34,9 +34,15 @@ class Ability
         if user.admin? # Admin user
             can :manage, :all
         else # Non-admin user
-            can [:manage, :create], [Book] do |b|
-                b.users.include?(user)
+            
+            #Book abilities
+            can [:read], [Book] do |b|
+                b.publishable?
             end
+            can [:manage, :create], [Book] do |b|
+                #b.users.include?(user)
+            end
+            #Chapter abilities
             can [:manage, :create], [Chapter] do |c|
                 c.book.users.include?(user)
             end

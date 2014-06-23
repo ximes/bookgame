@@ -7,6 +7,7 @@ Bookgame::Application.routes.draw do
   end
 
   match 'book/:book_id/chapters/map' => 'chapters#map', :via => :get, :as => :book_chapters_map
+  match 'book/:id/view' => 'books#view', :via => :get, :as => :book_view
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
