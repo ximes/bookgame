@@ -10,6 +10,8 @@
  *
  *= require_self
  *= require_tree .
+ *= require redactor-rails
+ *= redactor-rails/plugins
  */
 
  @import "bootswatch/cosmo/variables";
@@ -31,3 +33,10 @@
  .page-actions a{
  	color:#000;
  }
+
+.redactor_toolbar li a.redactor_btn_child {
+    background: url("binary-tree_14x14.png") center center no-repeat;
+}
+.redactor_toolbar li a.redactor_btn_child:hover {
+    background: url("binary-tree_14x14_hover.png") center center no-repeat;
+}

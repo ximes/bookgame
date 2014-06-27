@@ -37,6 +37,8 @@ gem 'bootswatch-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'redactor-rails'
+
 gem 'paper_trail', '~> 3.0.2'
 
 gem 'cancan'

@@ -18,6 +18,9 @@
 //= require bootstrap
 //= require cocoon
 //= require jquery.autogrowtextarea
+//= require redactor-rails
+//= require redactor-rails/plugins
+
 
 $(document).ready(function() {
 	$("textarea").autoGrow();

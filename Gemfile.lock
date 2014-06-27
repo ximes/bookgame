@@ -144,6 +144,10 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    redactor-rails (0.4.5)
+      devise
+      mime-types
+      orm_adapter
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -231,6 +235,7 @@ DEPENDENCIES
   paper_trail (~> 3.0.2)
   paperclip (~> 4.1)
   rails (= 4.0.2)
+  redactor-rails
   rspec-nc
   rspec-rails
   ruby-prof
