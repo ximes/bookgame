@@ -29,29 +29,25 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
-    def initialize(user)
-        user ||= User.new # guest user (not logged in)
-        
-        cannot [:view], [Comment]
-        can [:read, :download], [Book] do |b|
-            b.publishable?
-        end
+    user ||= User.new # guest user (not logged in)
 
-        if user.admin? # Admin user
-            can :manage, :all
-        else # Non-admin user
-            
-            #Book abilities
-            can [:manage, :create], [Book] do |b|
-                b.users.include?(user)
-            end
-            #Chapter abilities
-            can [:manage, :create], [Chapter] do |c|
-                c.book.users.include?(user)
-            end
-
-        end
+    cannot [:view], [Comment]
+    can [:read, :download], [Book] do |b|
+        b.publishable?
     end
 
+    if user.admin? # Admin user
+        can :manage, :all
+    else # Non-admin user
+        #Book abilities
+        can [:manage, :create], [Book] do |b|
+            b.users.include?(user)
+        end
+        #Chapter abilities
+        can [:manage, :create], [Chapter] do |c|
+            c.book.users.include?(user)
+        end
+
+    end
   end
 end

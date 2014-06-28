@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource :book, :only => [:index, :show]
+  load_and_authorize_resource
   before_action :set_book, only: [:show, :edit, :update, :destroy, :view, :download]
   before_filter :authenticate_user!, :except => [:view, :download]
 
