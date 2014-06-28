@@ -76,6 +76,7 @@ end
 #gems for testing
 group :development, :test do
   gem 'minitest'
+  gem 'database_cleaner'
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem 'guard-rspec', require: false
