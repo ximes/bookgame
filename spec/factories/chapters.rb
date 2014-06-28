@@ -11,4 +11,12 @@ FactoryGirl.define do
     beginning false
     book nil
   end
+
+  factory :chapter_with_book, :parent => :chapter do
+    book { |b| b.association(:book) }
+  end
+
+  factory :chapter_with_user, :parent => :chapter do
+    book { |b| b.association(:book_with_user) }
+  end
 end

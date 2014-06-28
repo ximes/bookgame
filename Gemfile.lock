@@ -36,10 +36,6 @@ GEM
     bootswatch-rails (0.5.0)
       railties (>= 3.1)
     builder (3.2.2)
-    cancan (1.6.10)
-    cancan_strong_parameters (0.4)
-      activesupport
-      cancan
     celluloid (0.15.2)
       timers (~> 1.1.0)
     climate_control (0.0.3)
@@ -124,6 +120,8 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pundit (0.2.3)
+      activesupport (>= 3.0.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -224,8 +222,6 @@ DEPENDENCIES
   autogrow-textarea-rails (~> 3.1.0)
   bootstrap-sass (~> 2.3.1.3)
   bootswatch-rails
-  cancan
-  cancan_strong_parameters
   cocoon
   coffee-rails (~> 4.0.0)
   d3-rails
@@ -241,6 +237,7 @@ DEPENDENCIES
   mysql2
   paper_trail (~> 3.0.2)
   paperclip (~> 4.1)
+  pundit
   rails (= 4.1.2)
   redactor-rails
   rspec-nc

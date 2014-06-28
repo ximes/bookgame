@@ -1,17 +1,12 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource
-  before_action :set_book, only: [:show, :edit, :update, :destroy, :view, :download]
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, :except => [:view, :download]
 
   # GET /books
   # GET /books.json
   def index
-    if can?(:manage, :all)
-      @books = Book.all
-    else
-      @books = Book.owned_by(current_user)
-      @other_books = Book.publishable - @books
-    end
+    @books = policy_scope(Book)
+    @other_books = Book.publishable - @books
   end
 
   # GET /books/1
@@ -20,10 +15,12 @@ class BooksController < ApplicationController
   end
 
   def view
+    @book = Book.find(params[:id])
     @comments = @book.comments.recent.limit(10).all
   end
 
   def download
+    @book = Book.find(params[:id])
     respond_to do |format|
       format.html
       format.pdf do
@@ -90,6 +87,7 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+      authorize @book
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

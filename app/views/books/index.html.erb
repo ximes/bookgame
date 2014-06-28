@@ -12,7 +12,7 @@
         <p class="image"><%= link_to image_tag(book.cover.url(:medium)), edit_book_path(book) %></p>
         <ul>
           <li><%= link_to 'View Book Public Page', book_view_path(book) %></li>
-          <li><%= link_to 'Download Book in pdf', book_download_path(book) %></li>
+          <li><%= link_to 'Download Book in pdf', book_download_path(book,  {:format => "pdf"}) %></li>
           <li><%= link_to "Edit Book Details", edit_book_path(book) %></li>
           <li><%= link_to 'View Chapters', book_chapters_path(book) %></li>
           <li><%= link_to "View Chapters on a Map", book_chapters_map_path(book), 'data-popup' => true %></li>

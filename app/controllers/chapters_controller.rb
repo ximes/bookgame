@@ -1,12 +1,12 @@
 class ChaptersController < ApplicationController
-  load_and_authorize_resource :chapter, :only => [:index, :show]
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
-  before_action :set_book
+  before_action :set_book, except: :map
+  before_filter :authenticate_user!
 
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = @book.chapters
+    @chapters = policy_scope(@book.chapters)
   end
 
   # GET /chapters/1
@@ -15,7 +15,8 @@ class ChaptersController < ApplicationController
   end
 
   def map
-    @chapters = @book.chapters
+    @book = Book.find(params[:book_id])
+    @chapters = policy_scope(@book.chapters)
   end
 
   # GET /chapters/new
@@ -73,9 +74,12 @@ class ChaptersController < ApplicationController
     def set_chapter
       @chapter = Chapter.find(params[:id])
       @book = Book.find(params[:book_id])
+      authorize @chapter
+      authorize @book
     end
     def set_book
       @book = Book.find(params[:book_id])
+      authorize @book
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

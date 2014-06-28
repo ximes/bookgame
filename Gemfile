@@ -41,8 +41,7 @@ gem 'redactor-rails'
 
 gem 'paper_trail', '~> 3.0.2'
 
-gem 'cancan'
-gem 'cancan_strong_parameters'
+gem "pundit"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

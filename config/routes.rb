@@ -2,9 +2,14 @@ Bookgame::Application.routes.draw do
 
   devise_for :users
   
+  resources :users
+  #resources :users, :only => [:show]
+
   resources :books do
    resources :chapters
   end
+
+  match 'user/:id/view' => 'users#view', :via => :get, :as => :user_view
 
   match 'book/:book_id/chapters/map' => 'chapters#map', :via => :get, :as => :book_chapters_map
   match 'book/:id/view' => 'books#view', :via => :get, :as => :book_view

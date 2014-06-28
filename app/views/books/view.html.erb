@@ -12,11 +12,9 @@
 	<li><%= link_to 'Download Book in pdf', book_download_path(@book, {:format => "pdf"}) %></li>
 </ul>
 
-<% if can? :view, @comments %>
 <hr />
 <h2>Comments</h2>
 <% @book.comments.each{|comment| %>
 	<h3><%= comment.title %></h3>
 <%	} %>
 <%= link_to 'Back', books_path %>
-<% end %>
