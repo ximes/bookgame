@@ -11,13 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 // Loads all Bootstrap javascripts
 //= require bootstrap
 //= require cocoon
-//= require jquery.autogrowtextarea
+//= require turbolinks
 //= require redactor-rails
 //= require redactor-rails/plugins
 
