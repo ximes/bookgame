@@ -12,7 +12,7 @@ class BookPolicy
       if user.admin?
         scope.all
       else
-        scope.where(:active => true).owned_by(user)
+        scope.owned_by(user)
       end
     end
   end
@@ -22,6 +22,14 @@ class BookPolicy
   def initialize(user, book)
     @user = user
     @book = book
+  end
+
+  def new?
+    admin_or_owner
+  end
+
+  def create?
+    admin_or_owner
   end
 
   def update?
