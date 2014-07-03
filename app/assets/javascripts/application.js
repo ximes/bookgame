@@ -20,9 +20,8 @@
 //= require turbolinks
 //= require redactor-rails
 //= require redactor-rails/plugins
-
+//= require_tree
 
 $(document).ready(function() {
-	$("textarea").autoGrow();
 	$('a[data-popup]').click(function(e) { window.open($(this).attr('href'),'','height=600, scrollbars=1'); e.preventDefault(); });
 });
