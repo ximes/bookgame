@@ -34,9 +34,12 @@
  	color:#000;
  }
 
-.redactor_toolbar li a.redactor_btn_child {
+.redactor_toolbar li a.redactor_btn_selectChild{
     background: url("binary-tree_14x14.png") center center no-repeat;
 }
-.redactor_toolbar li a.redactor_btn_child:hover {
+.redactor_toolbar li a.redactor_btn_selectChild:hover{
     background: url("binary-tree_14x14_hover.png") center center no-repeat;
+}
+#redactor_modal_inner{
+	padding:20px;
 }

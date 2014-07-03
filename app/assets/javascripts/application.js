@@ -20,6 +20,7 @@
 //= require turbolinks
 //= require redactor-rails
 //= require redactor-rails/plugins
+//= require redactor-rails/selectchild
 //= require_tree
 
 $(document).ready(function() {

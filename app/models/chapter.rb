@@ -12,6 +12,5 @@ class Chapter < ActiveRecord::Base
 	has_many :parents, :through => :parent_chapters, :source => :parent
 	has_many :children, :through => :child_chapters, :source => :chapter
 
-	accepts_nested_attributes_for :parent_chapters, :allow_destroy => true
-
+	accepts_nested_attributes_for :parent_chapters, :allow_destroy => false
 end

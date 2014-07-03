@@ -24,7 +24,7 @@ $(document).ready(
       "path":"/assets/redactor-rails",
       "css":"style.css",
       buttons: ['html', 'formatting', 'bold', 'italic', 'deleted','unorderedlist', 'orderedlist', 'outdent', 'indent','image', 'table', 'link', 'alignment', 'horizontalrule'],
-      plugins: ['child']
+      plugins: ['selectChild']
     }
   );
 });
