@@ -13,5 +13,8 @@ FactoryGirl.define do
     books { |b| [b.association(:book)] }
   end
 
+  factory :user_with_book_and_chapters, :parent => :user do
+    books { |b| [b.association(:book_with_chapters)] }
+  end
 
 end

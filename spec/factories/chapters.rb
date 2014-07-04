@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :chapter do
-    title "MyString"
-    introtext "MyText"
-    fulltext "MyText"
+    title "Chapter"
+    introtext "IntroText"
+    fulltext "FullText"
     active false
     death false
     ending false

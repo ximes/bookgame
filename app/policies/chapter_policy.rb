@@ -25,28 +25,10 @@ class ChapterPolicy < ApplicationPolicy
     @chapter = chapter
   end
 
-  def update?
-    admin_or_owner
-  end
-  
-  def edit?
-    admin_or_owner
-  end
-
-  def update?
-    admin_or_owner
-  end
-
-  def show?
-    admin_or_owner
-  end
-
-  def index?
-    admin_or_owner
-  end
-  
-  def destroy?
-    admin_or_owner
+  [:update?,:create?,:new?,:edit?,:show?,:index?,:destroy?].each do |action|
+    define_method "#{action}" do
+      admin_or_owner
+    end  
   end
 
   def admin_or_owner

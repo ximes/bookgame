@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'database_cleaner'
 require "pundit/rspec"
+require 'paperclip/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -26,7 +27,7 @@ RSpec.configure do |config|
   # putting devise in your specs
   # https://github.com/plataformatec/devise/wiki/How-To:-Controllers-and-Views-tests-with-Rails-3-(and-rspec)
   config.include FactoryGirl::Syntax::Methods
-
+  config.include Paperclip::Shoulda::Matchers
   config.include Devise::TestHelpers, :type => :controller
 
   config.include ControllerMacros, :type => :controller

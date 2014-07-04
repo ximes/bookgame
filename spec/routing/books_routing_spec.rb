@@ -31,5 +31,12 @@ describe BooksController do
       delete("/books/1").should route_to("books#destroy", :id => "1")
     end
 
+    it "routes to #view" do
+      get("/book/1/view").should route_to("books#view", :id => "1")
+    end
+
+    it "routes to #download" do
+      get("/book/1/download").should route_to("books#download", :id => "1")
+    end
   end
 end
