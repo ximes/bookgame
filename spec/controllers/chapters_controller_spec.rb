@@ -63,14 +63,14 @@ describe ChaptersController do
       it "assigns a newly created but unsaved chapter as @chapter" do
         # Trigger the behavior that occurs when invalid params are submitted
         Chapter.any_instance.stub(:save).and_return(false)
-        post :create, {:book_id => chapter.book.id, :chapter => { "title" => "invalid value" }}
+        post :create, {:book_id => chapter.book.id, :chapter => { "title" => "invalid value", "fulltext" => "" }}
         assigns(:chapter).should be_a_new(Chapter)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Chapter.any_instance.stub(:save).and_return(false)
-        post :create, {:book_id => chapter.book.id, :chapter => { "title" => "invalid value" }}
+        post :create, {:book_id => chapter.book.id, :chapter => { "title" => "invalid value", "fulltext" => "" }}
         response.should render_template("new")
       end
     end
