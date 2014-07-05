@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :chapter do
+    sequence(:id)
     title "Chapter"
     introtext "IntroText"
     fulltext "FullText"

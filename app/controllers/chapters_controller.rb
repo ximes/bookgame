@@ -1,7 +1,6 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
   before_action :set_book, except: :map
-  after_action :create_chapter_relations, only: [:create, :update]
   before_filter :authenticate_user!
 
   # GET /chapters
@@ -82,27 +81,6 @@ class ChaptersController < ApplicationController
       @book = Book.find(params[:book_id])
       authorize @book
     end
-
-    def create_chapter_relations
-
-      chapters_linked = @chapter.fulltext.scan(/\[link_to_chapter (\w*)\]/).flatten.uniq
-
-      @chapter.child_chapters.each {|c| c.destroy}
-
-      unless chapters_linked.empty?
-        chapters_linked.map do |child_chapter|
-          chapter = Chapter.find_by_id(child_chapter)
-
-          if chapter && chapter.book == @chapter.book
-            @chapter.child_chapters.create!(:parent => @chapter, :chapter => chapter)
-          else
-            field = @chapter.fulltext.gsub(/\[link_to_chapter #{Regexp.quote(child_chapter)}\]/, "")
-            @chapter.update({:fulltext => field})
-          end
-        end
-      end
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
       params.require(:chapter).permit(:title, :introtext, :fulltext, :active, :death, :ending, :beginning, :book_id)

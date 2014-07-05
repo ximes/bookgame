@@ -16,7 +16,6 @@ describe "chapters/edit" do
       assert_select "input#chapter_active[name=?]", "chapter[active]"
       assert_select "input#chapter_death[name=?]", "chapter[death]"
       assert_select "input#chapter_ending[name=?]", "chapter[ending]"
-      assert_select "input#chapter_beginning[name=?]", "chapter[beginning]"
     end
   end
 end
