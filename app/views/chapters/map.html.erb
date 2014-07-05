@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<svg width="100%" height="500">
+<svg width="100%" height="600" class="map">
     <g transform="translate(20,20)"/>
 </svg>
         <script>
@@ -14,11 +14,11 @@ var g = new dagreD3.Digraph();
 <%
 @chapters.each do |chapter| 
     label = ""
-    label.concat(" - Beginning") if chapter.beginning?
-    label.concat(" - Active") if chapter.active?
-    label.concat(" - Death") if chapter.death?
+    #label.concat(" - Beginning") if chapter.beginning?
+    #label.concat(" - Active") if chapter.active?
+    #label.concat(" - Death") if chapter.death?
     %>
-    g.addNode("<%= chapter.id %>", { label: "<%= chapter.title.concat(label) %>" });
+    g.addNode("<%= chapter.id %>", { label: "<%= chapter.title.concat(label) %>", nodeClass: "<%="active " if chapter.active?%><%="beginning " if chapter.beginning?%><%="death " if chapter.death?%>" });
 <%
 end
 
@@ -26,11 +26,11 @@ end
     chapter.parents.each do |parent| 
         label = ""
         
-        label.concat("Beginning") if parent.beginning?
-        label.concat("Ending") if chapter.ending?
+        label.concat("Beginning ") if parent.beginning?
+        label.concat("Ending ") if chapter.ending?
 
         %>
-        g.addEdge(null, "<%= parent.id %>", "<%= chapter.id %>", { label: "<%= label %>" });
+        g.addEdge(null, "<%= parent.id %>", "<%= chapter.id %>", { label: "<%= label %>", nodeClass: "<%="beginning " if parent.beginning? %><%="ending " if chapter.ending? %>" });
     <%
     end
 end

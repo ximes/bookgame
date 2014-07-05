@@ -26,3 +26,10 @@ svg {
 	margin-bottom:20px;
 	padding-bottom:20px;
 }
+
+.node.beginning rect{ fill:rgba(200,255,200, 0.9);}
+.node.death rect{ fill:rgba(255,200,200, 0.3);}
+.node.active rect{ fill:rgba(200,255,200, 0.3);}
+
+.edgeLabel.beginning { fill: #393;}
+.edgeLabel.ending { fill: #f33;}
