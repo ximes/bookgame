@@ -1,0 +1,43 @@
+.container.chapters
+ .row 
+  .col-md-12
+   %ol.breadcrumb
+    %li #{link_to 'Book', book_path(@book) }
+    %li.active Chapters list
+ .row
+  .chapter-list.col-md-12
+   .widget-header
+    %i.icon-list-alt
+    %h3 Chapters
+
+   .widget-content
+    .actions
+     = link_to "<span class=\"glyphicon glyphicon-plus\"></span>".html_safe, new_book_chapter_path(@book)
+     = link_to "<span class=\"glyphicon glyphicon-map-marker\"></span>".html_safe, book_chapters_map_path(@book), 'data-popup' => true
+
+    %table.table.table-hover.chapters
+     %thead
+      %tr
+       %th Title
+       %th Active
+       %th Beginning
+       %th Ending
+       %th Death
+       %th
+     %tbody
+      -@chapters.each do |chapter|
+       %tr
+        %td= link_to chapter.title, edit_book_chapter_path(@book, chapter)
+        %td
+         %span.label{:class => "label-" + (chapter.active? ? "success" : "danger")}
+          %span.glyphicon{:class => "glyphicon-" + (chapter.active? ? "ok" : "remove")}
+        %td
+         %span.label{:class => "label-" + (chapter.beginning? ? "success" : "default")}
+          %span.glyphicon{:class => "glyphicon-" + (chapter.beginning? ? "ok" : "remove")}
+        %td
+         %span.label{:class => "label-" + (chapter.ending? ? "success" : "default")}
+          %span.glyphicon{:class => "glyphicon-" + (chapter.ending? ? "ok" : "remove")}
+        %td
+         %span.label{:class => "label-" + (chapter.death? ? "success" : "default")}
+          %span.glyphicon{:class => "glyphicon-" + (chapter.death? ? "ok" : "remove")}
+        %td= link_to "<span class=\"glyphicon glyphicon-trash\"></span>".html_safe, book_chapter_path(@book, chapter), method: :delete, data: { confirm: 'Are you sure?' }

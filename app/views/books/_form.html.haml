@@ -1,0 +1,56 @@
+= form_for(@book, :html => { :multipart => true, :role => "form", :class => "form-horizontal" }) do |f|
+ - if @book.errors.any?
+  #error_explanation
+   %h2
+    {pluralize(@book.errors.count, "error")} prohibited this book from being saved:
+    %ul
+     - @book.errors.full_messages.each do |msg|
+      li= msg
+
+ .field.form-group
+  = f.label :title, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_field :title, :class => "form-control"
+
+ .field.form-group
+  = f.label :cover, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.file_field :cover
+
+ .field.form-group
+  = f.label :introtext, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_area :introtext, :class => "form-control redactor-intro", :rows => 40, :cols => 120
+
+ .field.form-group
+  = f.label :active, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.check_box :active, :class => "form-control switch"
+
+ .field.form-group
+  = f.label :font_name, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_field :font_name, :class => "form-control"
+
+ .field.form-group
+  = f.label :font_google, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.check_box :font_google, :class => "form-control switch"
+
+ .field.form-group
+  = f.label :font_google_name, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_field :font_google_name, :class => "form-control"
+
+ .field.form-group
+  = f.label :page_format, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = select_tag(:page_format, options_for_select(["a4", "a5"]), :include_blank => true, :class => "form-control")
+
+ .field.form-group
+  = f.label :credits, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_area :credits, :class => "form-control redactor-intro", :rows => 40, :cols => 120
+
+ .actions.form.group
+  = f.submit class: 'btn btn-primary'

@@ -1,0 +1,47 @@
+= form_for([@book, @chapter], :html => { :multipart => true, :role => "form", :class => "form-horizontal" }) do |f|
+ - if @book.errors.any?
+  #error_explanation
+   %h2
+    {pluralize(@chapter.errors.count, "error")} prohibited this book from being saved:
+    %ul
+     - @chapter.errors.full_messages.each do |msg|
+      li= msg
+
+ .field.form-group
+  = f.label :title, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_field :title, :class => "form-control"
+
+ .field.form-group
+  = f.label :introtext, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_area :introtext, :class => "form-control redactor-intro", :rows => 40, :cols => 120
+
+ .field.form-group
+  = f.label :fulltext, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_area :fulltext, :class => "form-control redactor", :rows => 40, :cols => 120
+
+ .field.form-group
+  = f.label :active, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.check_box :active, :class => "form-control switch"
+
+ .field.form-group
+  = f.label :death, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.check_box :death, :class => "form-control switch"
+
+ .field.form-group
+  = f.label :ending, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.check_box :ending, :class => "form-control switch"
+
+ = f.hidden_field :book_id
+
+ #chapter-list.hidden
+  %h3 Select a chapter to link from the list
+  = select_tag(:child_chapter, options_for_select(@chapter.book.chapters.collect {|p| [p.title, p.id] if p.id != @chapter.id}.compact), :include_blank => true)
+
+ .actions.form.group
+  = f.submit class: 'btn btn-primary'

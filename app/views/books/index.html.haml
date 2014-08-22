@@ -1,0 +1,34 @@
+.container.books
+ .row
+  .book-list{:class => "col-md-" + (@other_books.empty? ? "12" : "8")}
+   .widget-header
+    %i.icon-list-alt
+    %h3 Your Books
+
+   .widget-content
+    .actions
+     = link_to "<span class=\"glyphicon glyphicon-plus\"></span>".html_safe, new_book_path
+
+    - @books.each do |book|
+     .book{:class => ("success" if book.active)}
+      %h3.title
+       = link_to book.title, edit_book_path(book)
+      %p.image= link_to image_tag(book.cover.url(:medium)), edit_book_path(book)
+      %ul
+       %li= link_to "<span class=\"glyphicon glyphicon-eye-open\"></span>".html_safe, book_view_path(book)
+       %li= link_to "<span class=\"glyphicon glyphicon-download-alt\"></span>".html_safe, book_download_path(book,  {:format => "pdf"})
+       %li= link_to "<span class=\"glyphicon glyphicon-edit\"></span>".html_safe, edit_book_path(book)
+       %li= link_to "<span class=\"glyphicon glyphicon-tasks\"></span>".html_safe, book_chapters_path(book)
+       %li= link_to "<span class=\"glyphicon glyphicon-map-marker\"></span>".html_safe, book_chapters_map_path(book), 'data-popup' => true
+       %li= link_to "<span class=\"glyphicon glyphicon-trash\"></span>".html_safe, book, method: :delete, data: { confirm: 'Are you sure?' }
+
+  = unless @other_books.empty?
+   .col-md-4.otherbook-list
+    .widget-header
+     %i.icon-list-alt
+     %h3 Books from your neighbours
+    .widget-content
+     - @other_books.each do |book|
+      .book
+       %h3.title= link_to book.title, book_view_path(book)
+       %p.image= link_to image_tag(book.cover.url(:thumb)), book_view_path(book)

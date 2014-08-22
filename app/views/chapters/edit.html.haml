@@ -1,0 +1,16 @@
+.container.chapters
+ .row 
+  .col-md-12
+   %ol.breadcrumb
+    %li #{link_to 'Book', book_path(@book) }
+    %li #{link_to 'Chapters', book_chapters_path(@book) }
+    %li.active=@chapter.title
+ .row
+  .chapter-list.col-md-12
+   .widget-header
+    %i.icon-list-alt
+    %h3 Editing chapter
+
+   .widget-content
+    = render 'form'
+   = link_to 'Back', book_chapters_path(@book), :class => "btn btn-default"

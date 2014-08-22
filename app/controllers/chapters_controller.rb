@@ -17,6 +17,7 @@ class ChaptersController < ApplicationController
   def map
     @book = Book.find(params[:book_id])
     @chapters = policy_scope(@book.chapters)
+    render layout: 'headless'
   end
 
   # GET /chapters/new

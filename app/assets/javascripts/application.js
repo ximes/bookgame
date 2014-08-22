@@ -14,8 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-// Loads all Bootstrap javascripts
-//= require bootstrap
+//= require bootstrap-sprockets
+//= require bootstrap-switch
 //= require cocoon
 //= require turbolinks
 //= require redactor-rails
@@ -25,4 +25,5 @@
 
 $(document).ready(function() {
 	$('a[data-popup]').click(function(e) { window.open($(this).attr('href'),'','height=600, scrollbars=1'); e.preventDefault(); });
+	$(".switch").bootstrapSwitch();
 });

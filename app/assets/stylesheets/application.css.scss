@@ -10,29 +10,36 @@
  *
  *= require_self
  *= require_tree .
+ *= require admin
  *= require redactor-rails
  *= redactor-rails/plugins
+ *= require bootstrap3-switch
  */
 
- @import "bootswatch/cosmo/variables";
- @import "bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
- @import "bootstrap-responsive";
- @import "bootswatch/cosmo/bootswatch";
-
- body{
- 	padding-top: 100px;
- }
- .page-actions{
- 	border-bottom:1px solid #bbb;
- 	padding:10px;
- 	color:#000;
- 	text-align:right;
-	margin-bottom:20px;
- }
- .page-actions a{
- 	color:#000;
- }
+body{
+	padding-top: 0px;
+}
+.wrapper{
+	margin-top:30px;
+}
+.page-actions{
+	border-bottom:1px solid #bbb;
+	padding:10px;
+	color:#000;
+	text-align:right;
+margin-bottom:20px;
+}
+.actions{
+	border-bottom:1px dotted #bbb;
+	width:100%;
+	text-align:right;
+}
+footer {
+  height: 100px;
+}
 
 .redactor_toolbar li a.redactor_btn_selectChild{
     background: url("binary-tree_14x14.png") center center no-repeat;

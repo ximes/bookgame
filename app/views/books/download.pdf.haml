@@ -1,0 +1,4 @@
+%h1= @book.title
+= @book.chapters.each do |chapter|
+ %h2= chapter.title
+ = chapter.fulltext
