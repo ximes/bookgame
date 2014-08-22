@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628233323) do
+ActiveRecord::Schema.define(version: 20140705223233) do
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20140628233323) do
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
     t.boolean  "publishable",        default: false
+    t.text     "introtext"
+    t.string   "page_format"
+    t.string   "font_name"
+    t.boolean  "font_google"
+    t.string   "font_google_name"
+    t.text     "credits"
   end
 
   create_table "books_users", id: false, force: true do |t|
