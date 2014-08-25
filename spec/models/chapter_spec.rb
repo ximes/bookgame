@@ -17,6 +17,9 @@ describe Chapter do
 		    it "should have a child chapter" do
 		      @chapter.children.should include(other_chapter)
 		    end
+		    it "should be set as beginning" do
+		      @chapter.beginning?.should be_true
+		    end
 	    end
 		
 		describe "with parents" do
@@ -28,6 +31,7 @@ describe Chapter do
 			        :book => other_chapter.book
 		      	})
 		      	@chapter.parent_chapters.create!(:parent => other_chapter, :chapter => @chapter)
+		      	@chapter.save!
 			}
 		    it "should be valid" do
 		      @chapter.should be_valid
@@ -35,6 +39,11 @@ describe Chapter do
 		    it "should have a child chapter" do
 		      @chapter.parents.should include(other_chapter)
 		    end
+			it "should not be set as beginning" do
+		      @chapter.beginning?.should be_false
+		    end
 	    end
+
+
 	end
 end

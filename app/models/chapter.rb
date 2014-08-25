@@ -14,8 +14,11 @@ class Chapter < ActiveRecord::Base
 
 	accepts_nested_attributes_for :parent_chapters, :allow_destroy => false
 
-	
-	after_save :set_chapter_relations
+	after_save :set_chapter_relations, :set_beginning, :set_ending
+
+    def ending_or_death?
+    	ending? || death?
+	end
 
 	private
 
@@ -25,13 +28,31 @@ class Chapter < ActiveRecord::Base
 		unless chapters_linked.empty?
 			chapters_linked.map do |child_chapter|
 			  chapter = Chapter.find_by_id(child_chapter)
-			  if chapter && chapter.book == self.book
+			  if chapter && chapter.book == self.book && !ending_or_death?
 			    child_chapters.create!(:parent => self, :chapter => chapter)
 			  else
-			    field = fulltext.gsub(/\[link_to_chapter #{Regexp.quote(child_chapter)}\]/, "")
-			    self.fulltext = field
+			    field = fulltext.gsub(/\[link_to_chapter #{Regexp.quote(child_chapter)}\]/, "###link_removed###")
+			    self.update_column(:fulltext, field)
 			  end
 			end
 		end
     end
+
+    def set_beginning
+		if parents.empty?
+			self.update_column(:beginning, true)
+		else
+			self.update_column(:beginning, false)
+		end
+    	unless children.empty?
+			children.each do |chapter|
+				chapter.update_column(:beginning, false)
+			end
+		end
+	end
+    def set_ending
+    	if death?
+			self.update_column(:ending, true)
+		end
+	end
 end
