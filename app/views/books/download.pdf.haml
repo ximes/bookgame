@@ -1,3 +1,8 @@
+= content_for :stylesheets do
+ %style{:type => "text/css", :media =>:print}
+  @import url(http://fonts.googleapis.com/css?family=@book.font_name);
+  *{font-family:@book.font_name;}
+
 %h1= @book.title
 - @chapters.each_with_index do |chapter,index|
  %hr 

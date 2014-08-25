@@ -45,7 +45,7 @@
  .field.form-group
   = f.label :page_format, :class => "col-sm-2 control-label"
   .col-sm-10
-   = select_tag(:page_format, options_for_select(["a4", "a5"]), :include_blank => true, :class => "form-control")
+   = f.select(:page_format, ["a4", "a5"], :include_blank => true, :class => "form-control")
 
  .field.form-group
   = f.label :credits, :class => "col-sm-2 control-label"

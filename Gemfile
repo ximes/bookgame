@@ -29,7 +29,7 @@ gem "paperclip", "~> 4.1"
 
 gem 'acts_as_commentable'
 
-gem 'wicked_pdf'
+gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
 
 gem 'bootstrap-sass', '~> 3.2.0.1'
 

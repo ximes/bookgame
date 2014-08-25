@@ -27,10 +27,14 @@ class BooksController < ApplicationController
       format.html
       format.pdf do
         render :pdf => "#{@book.title}",
-               :disposition                    => 'attachment',
-               :layout                         => 'pdf.html'
-              #:cover                          => Rails.root + @book.cover.url(:hi_res),
-               #:header => { :right => '[page] of [topage]' },
+               
+               :layout                         => 'pdf.html.haml',
+               #:cover                          => "",
+               :page_size                      => "A5",
+               :font_name                      => "courier",
+               :header                         => { :font_size => 8, :center => @book.title},
+               :footer                         => { :center => '[page] of [topage]', :font_size => 8},
+               :disposition                    => 'attachment'
       end
     end
   end
