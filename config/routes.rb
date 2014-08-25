@@ -6,7 +6,9 @@ Bookgame::Application.routes.draw do
   #resources :users, :only => [:show]
 
   resources :books do
-   resources :chapters
+   resources :chapters do
+    post :sort, on: :collection
+   end
   end
 
   match 'user/:id/view' => 'users#view', :via => :get, :as => :user_view

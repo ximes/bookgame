@@ -35,6 +35,8 @@ gem 'bootstrap-sass', '~> 3.2.0.1'
 
 gem "bootstrap-switch-rails"
 
+gem 'acts_as_list'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -46,6 +48,7 @@ gem "pundit"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 gem 'autogrow-textarea-rails', '~> 3.1.0'
 

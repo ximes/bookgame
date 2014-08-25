@@ -6,7 +6,7 @@ class ChaptersController < ApplicationController
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = policy_scope(@book.chapters)
+    all_chapters
   end
 
   # GET /chapters/1
@@ -70,6 +70,15 @@ class ChaptersController < ApplicationController
     end
   end
 
+  def sort
+    all_chapters
+    @chapters.each do |chapter|
+      chapter.position =  params['chapter'].index(chapter.id.to_s) +1
+      chapter.save
+    end
+    head :ok, :content_type => 'text/html'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chapter
@@ -82,8 +91,13 @@ class ChaptersController < ApplicationController
       @book = Book.find(params[:book_id])
       authorize @book
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
-      params.require(:chapter).permit(:title, :introtext, :fulltext, :active, :death, :ending, :beginning, :book_id)
+      params.require(:chapter).permit(:title, :introtext, :fulltext, :active, :death, :ending, :beginning, :book_id, :position)
+    end
+
+    def all_chapters
+      @chapters = policy_scope(@book.chapters).by_order
     end
 end

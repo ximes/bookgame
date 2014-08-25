@@ -1,3 +1,26 @@
+:javascript
+ $(document).ready(function() {
+  $( ".sortable" ).sortable({
+   axis: 'y',
+   cursor: 'move',
+   dropOnEmpty: false,
+   opacity: 0.4,
+   scroll: true,
+   update: function(){
+    $.ajax({
+       url: '/books/2/chapters/sort',
+       type: 'post',
+       data: $(this).sortable("serialize", 'id'),
+       dataType: 'script',
+       complete: function(request){
+         $('.chapters').effect('highlight');
+       }
+     });
+   }
+  });;
+  $( ".sortable" ).disableSelection();
+ });
+
 .container.chapters
  .row 
   .col-md-12
@@ -24,10 +47,12 @@
        %th Ending
        %th Death
        %th
-     %tbody
+     %tbody.sortable
       -@chapters.each do |chapter|
-       %tr
-        %td= link_to chapter.title, edit_book_chapter_path(@book, chapter)
+       %tr{:id => "chapter_#{chapter.id}"}
+        %td.ui-state-default
+         %span.ui-icon.ui-icon-arrowthick-2-n-s
+         = link_to chapter.title, edit_book_chapter_path(@book, chapter)
         %td
          %span.label{:class => "label-" + (chapter.active? ? "success" : "danger")}
           %span.glyphicon{:class => "glyphicon-" + (chapter.active? ? "ok" : "remove")}

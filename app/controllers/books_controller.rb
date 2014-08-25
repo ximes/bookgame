@@ -21,6 +21,8 @@ class BooksController < ApplicationController
 
   def download
     @book = Book.find(params[:id])
+    @chapters = @book.chapters.by_print_order
+    
     respond_to do |format|
       format.html
       format.pdf do
