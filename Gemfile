@@ -3,9 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -16,8 +13,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 gem 'devise'
-
-gem 'mysql2'
 
 gem 'haml'
 
@@ -60,13 +55,14 @@ end
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'mysql2'
 
+group :production do
+  gem 'therubyracer'
+end
 #gems for testing
 group :development, :test do
   gem "rspec-rails"
@@ -82,4 +78,7 @@ end
 #gems for error display
 group :development do
   #gem "better_errors"
+  gem 'capistrano-rails', '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-rvm', '~> 0.1', require: false
 end
