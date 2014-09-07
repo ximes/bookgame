@@ -4,7 +4,7 @@ FactoryGirl.define do
 
     trait :publishable do
     	publishable true
-    	active true
+    	completed true
     end
   end
   factory :book_with_user, :parent => :book do

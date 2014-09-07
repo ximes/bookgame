@@ -23,11 +23,6 @@
    = f.text_area :introtext, :class => "form-control redactor-intro", :rows => 40, :cols => 120
 
  .field.form-group
-  = f.label :active, :class => "col-sm-2 control-label"
-  .col-sm-10
-   = f.check_box :active, :class => "form-control switch"
-
- .field.form-group
   = f.label :font_name, :class => "col-sm-2 control-label"
   .col-sm-10
    = f.text_field :font_name, :class => "form-control"
@@ -53,4 +48,18 @@
    = f.text_area :credits, :class => "form-control redactor-intro", :rows => 40, :cols => 120
 
  .actions.form.group
+  - if @book.completed?
+   = link_to "Mark as Not Completed", uncomplete_book_path(@book), method: :post, data: { confirm: 'Are you sure?' },:class => 'btn btn-default'
+   - unless @book.publishable?
+    = link_to "Publish!", publish_book_path(@book), method: :post, data: { confirm: 'Are you sure?' },:class => 'btn btn-default'
+   - else
+    = link_to "Unpublish!", unpublish_book_path(@book), method: :post, data: { confirm: 'Are you sure?' },:class => 'btn btn-default'
+  - else
+   .alert.alert-success
+    %p If you want to publish your book, make sure all chapters are marked as Completed
+
+  - unless @book.completed
+   = link_to "Mark As Completed", complete_book_path(@book), method: :post, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default'
+
+  = link_to "List of Chapters", book_chapters_path(@book), :class => "btn btn-default"
   = f.submit class: 'btn btn-primary'

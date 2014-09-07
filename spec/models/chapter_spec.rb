@@ -43,7 +43,37 @@ describe Chapter do
 		      @chapter.beginning?.should be_false
 		    end
 	    end
+	end
 
-
+	context "when marked as complete" do
+		describe "with completable chapter" do
+	  		let(:chapter) {create(:chapter_with_book)}
+			before (:each){
+				chapter.complete!
+			}
+		    it "should be completed" do
+		      chapter.completed.should be_true
+		    end
+	    end	
+	    describe "with uncompletable chapter" do
+	  		let(:chapter) {create(:chapter_with_book, :fulltext => "#{LINK_REMOVED_TEXT}")}
+			before (:each){
+				chapter.complete!
+			}
+		    it "shouldn't be completed" do
+		      chapter.completed.should be_false
+		    end
+	    end	
+	end
+	context "when marked as uncomplete" do
+		describe "with any completed chapter" do
+	  		let(:chapter) {create(:chapter_with_book, :completed =>true)}
+			before (:each){
+				chapter.uncomplete!
+			}
+		    it "should be uncompleted" do
+		      chapter.completed.should be_false
+		    end
+	    end	
 	end
 end

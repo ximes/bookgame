@@ -10,7 +10,7 @@
      = link_to "<span class=\"glyphicon glyphicon-plus\"></span>".html_safe, new_book_path
 
     - @books.each do |book|
-     .book{:class => ("success" if book.active)}
+     .book{:class => ("success" if book.completed)}
       %h3.title
        = link_to book.title, edit_book_path(book)
       %p.image= link_to image_tag(book.cover.url(:medium)), edit_book_path(book)

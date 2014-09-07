@@ -41,8 +41,8 @@
     %table.table.table-hover.chapters
      %thead
       %tr
+       %th
        %th Title
-       %th Active
        %th Beginning
        %th Ending
        %th Death
@@ -50,12 +50,17 @@
      %tbody.sortable
       -@chapters.each do |chapter|
        %tr{:id => "chapter_#{chapter.id}"}
+        %td
+         - if chapter.completed?
+          = link_to "<span class=\"label label-success\"><span class=\"glyphicon glyphicon-ok\"></span></span>".html_safe, uncomplete_book_chapter_path(@book, chapter), method: :post, data: { confirm: 'Are you sure?' }
+         - else
+          = link_to "<span class=\"label label-danger\"><span class=\"glyphicon glyphicon-remove\"></span></span>".html_safe, complete_book_chapter_path(@book, chapter), method: :post, data: { confirm: 'Are you sure? You won\'t be able to edit the chapter until you reopen it again.' }
         %td.ui-state-default
          %span.ui-icon.ui-icon-arrowthick-2-n-s
-         = link_to chapter.title, edit_book_chapter_path(@book, chapter)
-        %td
-         %span.label{:class => "label-" + (chapter.active? ? "success" : "danger")}
-          %span.glyphicon{:class => "glyphicon-" + (chapter.active? ? "ok" : "remove")}
+         - if chapter.completed? 
+          = chapter.title
+         - else
+          = link_to chapter.title, edit_book_chapter_path(@book, chapter) 
         %td
          %span.label{:class => "label-" + (chapter.beginning? ? "success" : "default")}
           %span.glyphicon{:class => "glyphicon-" + (chapter.beginning? ? "ok" : "remove")}
@@ -65,4 +70,6 @@
         %td
          %span.label{:class => "label-" + (chapter.death? ? "success" : "default")}
           %span.glyphicon{:class => "glyphicon-" + (chapter.death? ? "ok" : "remove")}
-        %td= link_to "<span class=\"glyphicon glyphicon-trash\"></span>".html_safe, book_chapter_path(@book, chapter), method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+         = link_to "<span class=\"glyphicon glyphicon-trash\"></span>".html_safe, book_chapter_path(@book, chapter), method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to "Book details", edit_book_path(@book), :class => "btn btn-default"

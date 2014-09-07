@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825110636) do
+ActiveRecord::Schema.define(version: 20140902212949) do
 
   create_table "books", force: true do |t|
     t.string   "title"
-    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cover_file_name"
@@ -29,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140825110636) do
     t.boolean  "font_google"
     t.string   "font_google_name"
     t.text     "credits"
+    t.boolean  "completed",          default: false
   end
 
   create_table "books_users", id: false, force: true do |t|
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20140825110636) do
     t.string   "title"
     t.text     "introtext"
     t.text     "fulltext"
-    t.boolean  "active"
     t.boolean  "death"
     t.boolean  "ending"
     t.boolean  "beginning"
@@ -48,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140825110636) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.boolean  "completed",  default: false
   end
 
   create_table "chapterships", force: true do |t|

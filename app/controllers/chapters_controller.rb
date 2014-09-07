@@ -1,5 +1,5 @@
 class ChaptersController < ApplicationController
-  before_action :set_chapter, only: [:show, :edit, :update, :destroy]
+  before_action :set_chapter, only: [:show, :edit, :update, :destroy, :complete, :uncomplete]
   before_action :set_book, except: :map
   before_filter :authenticate_user!
 
@@ -60,6 +60,35 @@ class ChaptersController < ApplicationController
     end
   end
 
+  # PATCH/PUT /chapter/1
+  # PATCH/PUT /chapter/1.json
+  def complete
+    respond_to do |format|
+      if @chapter.complete!
+        format.html { redirect_to book_chapters_path(@book), notice: 'Chapter was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to book_chapters_path(@book), alert: "Chapter was not completable. Check for the presence of #{LINK_REMOVED_TEXT} in the text" }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /chapter/1
+  # PATCH/PUT /chapter/1.json
+  def uncomplete
+    respond_to do |format|
+      if @chapter.uncomplete!
+        format.html { redirect_to book_chapters_path(@book), notice: 'Chapter was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   # DELETE /chapters/1
   # DELETE /chapters/1.json
   def destroy
@@ -94,7 +123,7 @@ class ChaptersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
-      params.require(:chapter).permit(:title, :introtext, :fulltext, :active, :death, :ending, :beginning, :book_id, :position)
+      params.require(:chapter).permit(:title, :introtext, :fulltext, :death, :ending, :beginning, :book_id, :position)
     end
 
     def all_chapters

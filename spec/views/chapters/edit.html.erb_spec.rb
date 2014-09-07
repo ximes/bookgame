@@ -13,7 +13,6 @@ describe "chapters/edit" do
       assert_select "input#chapter_title[name=?]", "chapter[title]"
       assert_select "textarea#chapter_introtext[name=?]", "chapter[introtext]"
       assert_select "textarea#chapter_fulltext[name=?]", "chapter[fulltext]"
-      assert_select "input#chapter_active[name=?]", "chapter[active]"
       assert_select "input#chapter_death[name=?]", "chapter[death]"
       assert_select "input#chapter_ending[name=?]", "chapter[ending]"
     end

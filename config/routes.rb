@@ -6,8 +6,14 @@ Bookgame::Application.routes.draw do
   #resources :users, :only => [:show]
 
   resources :books do
+   post :complete, on: :member
+   post :uncomplete, on: :member
+   post :publish, on: :member
+   post :unpublish, on: :member
    resources :chapters do
     post :sort, on: :collection
+    post :complete, on: :member
+    post :uncomplete, on: :member
    end
   end
 

@@ -24,7 +24,7 @@ class BookPolicy
     @book = book
   end
 
-  [:update?,:create?,:new?,:edit?,:show?,:index?,:destroy?,:sort?].each do |action|
+  [:update?,:create?,:new?,:edit?,:show?,:index?,:destroy?,:sort?, :complete?, :uncomplete?, :publish?, :unpublish?].each do |action|
     define_method "#{action}" do
       admin_or_owner
     end  

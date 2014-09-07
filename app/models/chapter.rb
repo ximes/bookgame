@@ -1,5 +1,7 @@
 class Chapter < ActiveRecord::Base
 
+	include Completable
+	
 	has_paper_trail
 
 	belongs_to :book
@@ -23,6 +25,10 @@ class Chapter < ActiveRecord::Base
 
     def ending_or_death?
     	ending? || death?
+	end
+	
+	def completable?
+		fulltext.scan(/#{LINK_REMOVED_TEXT}/).flatten.empty?
 	end
 
 	private

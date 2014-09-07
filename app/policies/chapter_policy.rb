@@ -25,7 +25,7 @@ class ChapterPolicy < ApplicationPolicy
     @chapter = chapter
   end
 
-  [:update?,:create?,:new?,:edit?,:show?,:index?,:destroy?,:sort?].each do |action|
+  [:update?,:create?,:new?,:edit?,:show?,:index?,:destroy?,:sort?,:complete?, :uncomplete?].each do |action|
     define_method "#{action}" do
       admin_or_owner
     end  

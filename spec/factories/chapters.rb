@@ -6,11 +6,19 @@ FactoryGirl.define do
     title "Chapter"
     introtext "IntroText"
     fulltext "FullText"
-    active false
+    completed false
     death false
     ending false
     beginning false
     book nil
+  end
+
+  factory :chapter_completed, :parent => :chapter do
+    completed true
+  end
+
+  factory :chapter_uncompleted, :parent => :chapter do
+    completed false
   end
 
   factory :chapter_with_book, :parent => :chapter do

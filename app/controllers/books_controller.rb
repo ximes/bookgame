@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :publish, :unpublish, :complete, :uncomplete]
   before_filter :authenticate_user!, :except => [:view, :download]
 
   # GET /books
@@ -65,6 +65,60 @@ class BooksController < ApplicationController
     end
   end
 
+  # PATCH/PUT /chapter/1
+  # PATCH/PUT /chapter/1.json
+  def publish
+    respond_to do |format|
+      if @book.publish!
+        format.html { redirect_to edit_book_path(@book), notice: 'Book successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to edit_book_path(@book), alert: "Book is not publishable. Try to set all chapters as completed and then try again" }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def unpublish
+    respond_to do |format|
+      if @book.unpublish!
+        format.html { redirect_to edit_book_path(@book), notice: 'Book successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to edit_book_path(@book), alert: "Book is not unpublishable." }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /chapter/1
+  # PATCH/PUT /chapter/1.json
+  def complete
+    respond_to do |format|
+      if @book.complete!
+        format.html { redirect_to edit_book_url(@book), notice: 'Book was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to edit_book_url(@book), alert: "Book was not completable. Check for the presence of #{LINK_REMOVED_TEXT} in the text" }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /chapter/1
+  # PATCH/PUT /chapter/1.json
+  def uncomplete
+    respond_to do |format|
+      if @book.uncomplete!
+        format.html { redirect_to edit_book_url(@book), notice: 'Book was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
@@ -98,6 +152,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :introtext, :page_format, :font_name, :font_google, :font_google_name, :credits,  :cover,:user_id, :active)
+      params.require(:book).permit(:title, :introtext, :page_format, :font_name, :font_google, :font_google_name, :credits,  :cover,:user_id)
     end
 end
