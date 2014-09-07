@@ -14,10 +14,9 @@
 
  %body
   = render :partial => 'layouts/navigation'
-  .container
-   .row
-    .span12
-     = render :partial => 'layouts/notifications'
-   .row
-    .span12
-     = yield
+  .wrapper
+   .container
+    .row
+     .col-md-12.col-sm-12
+      = render :partial => 'layouts/notifications'
+      = yield

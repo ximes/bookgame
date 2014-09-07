@@ -1,0 +1,5 @@
+<% if user_signed_in? %>
+<h1>Welcome back</h1>
+<% else %>
+<%= render "guest" %>
+<% end %>

@@ -1,0 +1,65 @@
+= form_for(@book, :html => { :multipart => true, :role => "form", :class => "form-horizontal" }) do |f|
+ - if @book.errors.any?
+  #error_explanation
+   %h2
+    {pluralize(@book.errors.count, "error")} prohibited this book from being saved:
+    %ul
+     - @book.errors.full_messages.each do |msg|
+      li= msg
+
+ .field.form-group
+  = f.label :title, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_field :title, :class => "form-control"
+
+ .field.form-group
+  = f.label :cover, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.file_field :cover
+
+ .field.form-group
+  = f.label :introtext, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_area :introtext, :class => "form-control redactor-intro", :rows => 40, :cols => 120
+
+ .field.form-group
+  = f.label :font_name, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_field :font_name, :class => "form-control"
+
+ .field.form-group
+  = f.label :font_google, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.check_box :font_google, :class => "form-control switch"
+
+ .field.form-group
+  = f.label :font_google_name, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_field :font_google_name, :class => "form-control"
+
+ .field.form-group
+  = f.label :page_format, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.select(:page_format, ["a4", "a5"], :include_blank => true, :class => "form-control")
+
+ .field.form-group
+  = f.label :credits, :class => "col-sm-2 control-label"
+  .col-sm-10
+   = f.text_area :credits, :class => "form-control redactor-intro", :rows => 40, :cols => 120
+
+ .actions.form.group
+  - if @book.completed?
+   = link_to "Mark as Not Completed", uncomplete_book_path(@book), method: :post, data: { confirm: 'Are you sure?' },:class => 'btn btn-default'
+   - unless @book.publishable?
+    = link_to "Publish!", publish_book_path(@book), method: :post, data: { confirm: 'Are you sure?' },:class => 'btn btn-default'
+   - else
+    = link_to "Unpublish!", unpublish_book_path(@book), method: :post, data: { confirm: 'Are you sure?' },:class => 'btn btn-default'
+  - else
+   .alert.alert-success
+    %p If you want to publish your book, make sure all chapters are marked as Completed
+
+  - unless @book.completed
+   = link_to "Mark As Completed", complete_book_path(@book), method: :post, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default'
+
+  = link_to "List of Chapters", book_chapters_path(@book), :class => "btn btn-default"
+  = f.submit class: 'btn btn-primary'

@@ -2,18 +2,33 @@ Bookgame::Application.routes.draw do
 
   devise_for :users
   
+  resources :users
+  #resources :users, :only => [:show]
+
   resources :books do
-   resources :chapters
+   post :complete, on: :member
+   post :uncomplete, on: :member
+   post :publish, on: :member
+   post :unpublish, on: :member
+   resources :chapters do
+    post :sort, on: :collection
+    post :complete, on: :member
+    post :uncomplete, on: :member
+   end
   end
 
+  match 'user/:id/view' => 'users#view', :via => :get, :as => :user_view
+
   match 'book/:book_id/chapters/map' => 'chapters#map', :via => :get, :as => :book_chapters_map
+  match 'book/:id/view' => 'books#view', :via => :get, :as => :book_view
+  match 'book/:id/download' => 'books#download', :via => :get, :as => :book_download
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root 'books#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

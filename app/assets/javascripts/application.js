@@ -11,15 +11,20 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
-//= require_tree .
-// Loads all Bootstrap javascripts
-//= require bootstrap
+//= require bootstrap-sprockets
+//= require bootstrap-switch
 //= require cocoon
-//= require jquery.autogrowtextarea
+//= require turbolinks
+//= require redactor-rails
+//= require redactor-rails/plugins
+//= require redactor-rails/selectchild
+//= require_tree
 
 $(document).ready(function() {
-	$("textarea").autoGrow();
 	$('a[data-popup]').click(function(e) { window.open($(this).attr('href'),'','height=600, scrollbars=1'); e.preventDefault(); });
+	$(".switch").bootstrapSwitch();
 });

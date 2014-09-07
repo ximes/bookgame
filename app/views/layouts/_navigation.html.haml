@@ -1,29 +1,22 @@
-.navbar.navbar-fixed-top
+.navbar.navbar-fixed-top.navbar-default{:role => "navigation"}
  .navbar-inner
   .container
-   %a.brand{:href => root_path}
-    Bookgame
-   <a class="brand btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-   %span.icon-bar
-   %span.icon-bar
-   %span.icon-bar
-   </a>
-   .nav-collapse.collapse#main-menu
-    %ul.nav
-     %li
-      = link_to "Books", books_path
-    %ul.nav.pull-right
-     - unless user_signed_in?
-      %li 
-       = link_to "Login", new_user_session_path
+   .navbar-header
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    %span.sr-only Toggle navigation
+    %span.icon-bar
+    %span.icon-bar
+    %span.icon-bar
+    </button>
+    %a.navbar-brand{:href => root_path}
+     Bookgame
+   .navbar-collapse.collapse#main-menu
+    %ul.nav.navbar-nav
+     - if user_signed_in?
       %li
-       = link_to "Sign up", new_user_registration_path
-     - else
+       = link_to "Books", books_path
+     - if user_signed_in? and current_user.admin?
       %li
-       = link_to edit_user_registration_path do
-        %i.icon-wrench
-        Settings
-      %li
-       = link_to destroy_user_session_path, :method => "DELETE" do
-        %i.icon-off
-        Esci
+       = link_to "Users", users_path
+    %ul.nav.navbar-nav.pull-right.login
+     = render :partial => 'layouts/login'

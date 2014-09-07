@@ -1,3 +1,33 @@
 // Place all the styles related to the Books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container.books{
+	border-bottom:1px solid #bbb;
+	margin-bottom:20px;
+	padding-bottom:20px;
+	display:block;
+	clear:both;
+}
+.container .book-list{
+	margin-bottom:20px;
+}
+.container .book-list .book{
+	display:inline-block;
+	margin:0 20px;
+	vertical-align:top;
+}
+
+.container.books ul, .book ul{
+	list-style:none;
+}
+.container.books ul{
+	text-align:center;
+}
+.container.books h3,
+.container.books .image{
+	text-align:center;
+}
+.container.books ul li{
+	display:inline-block;
+}

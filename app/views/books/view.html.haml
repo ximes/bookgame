@@ -1,0 +1,17 @@
+%p#notice= notice
+%p
+ %strong Title:
+ = @book.title
+
+%p
+ = image_tag @book.cover.url(:medium)
+
+%ul
+ %li= link_to 'Download Book in pdf', book_download_path(@book, {:format => "pdf"})
+
+%hr
+%h2 Comments
+= @book.comments.each{|comment|
+ %h3= comment.title
+
+= link_to 'Back', books_path, :class => "btn btn-default"

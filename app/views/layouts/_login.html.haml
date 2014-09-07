@@ -1,0 +1,16 @@
+- unless user_signed_in?
+ %li= link_to "Login", new_user_session_path
+ %li= link_to "Sign up", new_user_registration_path
+- else
+ %li
+  = link_to edit_user_registration_path do
+   %i.icon-wrench
+   Settings
+ %li
+  = link_to user_view_path(current_user)  do
+   %i.icon-wrench
+   Public Profile
+ %li
+  = link_to destroy_user_session_path, :method => "DELETE" do
+   %i.icon-off
+   Esci

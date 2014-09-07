@@ -1,12 +1,12 @@
 class ChaptersController < ApplicationController
-  load_and_authorize_resource :chapter, :only => [:index, :show]
-  before_action :set_chapter, only: [:show, :edit, :update, :destroy]
-  before_action :set_book
+  before_action :set_chapter, only: [:show, :edit, :update, :destroy, :complete, :uncomplete]
+  before_action :set_book, except: :map
+  before_filter :authenticate_user!
 
   # GET /chapters
   # GET /chapters.json
   def index
-    @chapters = @book.chapters
+    all_chapters
   end
 
   # GET /chapters/1
@@ -15,7 +15,9 @@ class ChaptersController < ApplicationController
   end
 
   def map
-    @chapters = @book.chapters
+    @book = Book.find(params[:book_id])
+    @chapters = policy_scope(@book.chapters)
+    render layout: 'headless'
   end
 
   # GET /chapters/new
@@ -35,7 +37,7 @@ class ChaptersController < ApplicationController
 
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to book_chapters_path(@book, @chapter), notice: 'Chapter was successfully created.' }
+        format.html { redirect_to book_chapter_path(@book, @chapter), notice: 'Chapter was successfully created.' }
         format.json { render action: 'show', status: :created, location: @chapter }
       else
         format.html { render action: 'new' }
@@ -49,7 +51,7 @@ class ChaptersController < ApplicationController
   def update
     respond_to do |format|
       if @chapter.update(chapter_params)
-        format.html { redirect_to book_chapters_path(@book, @chapter), notice: 'Chapter was successfully updated.' }
+        format.html { redirect_to book_chapter_path(@book, @chapter), notice: 'Chapter was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -57,6 +59,35 @@ class ChaptersController < ApplicationController
       end
     end
   end
+
+  # PATCH/PUT /chapter/1
+  # PATCH/PUT /chapter/1.json
+  def complete
+    respond_to do |format|
+      if @chapter.complete!
+        format.html { redirect_to book_chapters_path(@book), notice: 'Chapter was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to book_chapters_path(@book), alert: "Chapter was not completable. Check for the presence of #{LINK_REMOVED_TEXT} in the text" }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /chapter/1
+  # PATCH/PUT /chapter/1.json
+  def uncomplete
+    respond_to do |format|
+      if @chapter.uncomplete!
+        format.html { redirect_to book_chapters_path(@book), notice: 'Chapter was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @chapter.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # DELETE /chapters/1
   # DELETE /chapters/1.json
@@ -68,18 +99,34 @@ class ChaptersController < ApplicationController
     end
   end
 
+  def sort
+    all_chapters
+    @chapters.each do |chapter|
+      chapter.position =  params['chapter'].index(chapter.id.to_s) +1
+      chapter.save
+    end
+    head :ok, :content_type => 'text/html'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chapter
       @chapter = Chapter.find(params[:id])
       @book = Book.find(params[:book_id])
+      authorize @chapter
+      authorize @book
     end
     def set_book
       @book = Book.find(params[:book_id])
+      authorize @book
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
-      params.require(:chapter).permit(:title, :introtext, :fulltext, :active, :death, :ending, :beginning, :book_id, :parent_chapters_attributes => [:id, :parent_id, :_destroy])
+      params.require(:chapter).permit(:title, :introtext, :fulltext, :death, :ending, :beginning, :book_id, :position)
+    end
+
+    def all_chapters
+      @chapters = policy_scope(@book.chapters).by_order
     end
 end

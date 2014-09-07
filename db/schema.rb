@@ -11,17 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622182728) do
+ActiveRecord::Schema.define(version: 20140902212949) do
 
   create_table "books", force: true do |t|
     t.string   "title"
-    t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cover_file_name"
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
+    t.boolean  "publishable",        default: false
+    t.text     "introtext"
+    t.string   "page_format"
+    t.string   "font_name"
+    t.boolean  "font_google"
+    t.string   "font_google_name"
+    t.text     "credits"
+    t.boolean  "completed",          default: false
   end
 
   create_table "books_users", id: false, force: true do |t|
@@ -33,13 +40,14 @@ ActiveRecord::Schema.define(version: 20140622182728) do
     t.string   "title"
     t.text     "introtext"
     t.text     "fulltext"
-    t.boolean  "active"
     t.boolean  "death"
     t.boolean  "ending"
     t.boolean  "beginning"
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
+    t.boolean  "completed",  default: false
   end
 
   create_table "chapterships", force: true do |t|
@@ -50,20 +58,39 @@ ActiveRecord::Schema.define(version: 20140622182728) do
   add_index "chapterships", ["chapter_id"], name: "index_chapterships_on_chapter_id", using: :btree
   add_index "chapterships", ["parent_id"], name: "index_chapterships_on_parent_id", using: :btree
 
+  create_table "comments", force: true do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.string   "role",                        default: "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "admin",                  default: false
+    t.integer  "role",                   default: 0
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

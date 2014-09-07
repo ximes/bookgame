@@ -1,0 +1,24 @@
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<p>
+<%= image_tag @user.picture.url(:medium) %>
+</p>
+
+<h2>Books</h2>
+<ul>
+<% @user.books.publishable.each{|book| %>
+	<li><%= link_to book.title, book_view_path(book) %></li>
+<%	} %>
+</ul>
+	
+
+
+<hr />
+<h2>Comments</h2>
+<% @user.comments.each{|comment| %>
+	<h3><%= comment.title %></h3>
+<%	} %>
+
+<%= link_to 'Back', books_path %>

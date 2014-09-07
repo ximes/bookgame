@@ -1,0 +1,20 @@
+!!!
+%html
+ %head
+  %title 
+   Bookgame
+  = stylesheet_link_tag    "application", :media => "all",  "data-turbolinks-track" => true
+  = javascript_include_tag "application", "data-turbolinks-track" => true
+  = csrf_meta_tags
+  = favicon_link_tag
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png" />
+
+ %body.welcome
+  .wrapper
+   %ul.nav.pull-right.login
+    = render :partial => 'layouts/login'
+   = yield
