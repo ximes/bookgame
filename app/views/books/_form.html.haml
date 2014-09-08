@@ -58,8 +58,9 @@
    .alert.alert-success
     %p If you want to publish your book, make sure all chapters are marked as Completed
 
-  - unless @book.completed
+  - unless @book.new_record? || @book.completed
    = link_to "Mark As Completed", complete_book_path(@book), method: :post, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default'
 
-  = link_to "List of Chapters", book_chapters_path(@book), :class => "btn btn-default"
+  - unless @book.new_record? 
+   = link_to "List of Chapters", book_chapters_path(@book), :class => "btn btn-default"
   = f.submit class: 'btn btn-primary'
