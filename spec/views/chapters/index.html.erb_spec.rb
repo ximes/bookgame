@@ -11,6 +11,6 @@ describe "chapters/index" do
 
   it "renders a list of chapters" do
     render
-    assert_select "tr>td", :text => "Chapter".to_s, :count => 2
+    assert_select "tr>td", /Chapter ([0-9]*)/, :count => 2
   end
 end

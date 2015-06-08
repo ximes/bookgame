@@ -3,13 +3,13 @@
 FactoryGirl.define do
   factory :chapter do
     sequence(:id)
-    title "Chapter"
+    sequence(:title) { |n| "Chapter #{n}" }
     introtext "IntroText"
     fulltext "FullText"
     completed false
     death false
     ending false
-    beginning false
+    beginning nil
     book nil
   end
 
