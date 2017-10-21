@@ -74,6 +74,7 @@ end
 gem "pg"
 
 group :production do
+  gem "rails_12factor"
   gem "therubyracer"
 end
 #gems for testing
