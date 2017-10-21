@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require turbolinks
+//= require cloudinary
 //= require bootstrap-sprockets
 //= require bootstrap-switch
 //= require cocoon

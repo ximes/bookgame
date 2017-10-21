@@ -55,6 +55,8 @@ gem "jquery-turbolinks"
 gem "jbuilder", "~> 1.2"
 gem "json", git: "https://github.com/flori/json.git", branch: "v1.8.6"
 
+gem "cloudinary"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem "sdoc", require: false

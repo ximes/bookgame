@@ -9,6 +9,8 @@
 .DS_Store
 
 # Ignore the default SQLite database.
+.cloudinary*
+/config/cloudinary.yml
 /db/*.sqlite3
 /db/*.sqlite3-journal
 

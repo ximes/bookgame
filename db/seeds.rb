@@ -1,48 +1,73 @@
-require 'factory_girl_rails'
-
 #creates an admin
-FactoryGirl.create :user, :admin
+User.create!(
+  email: "admin@example.com",
+  password: "password",
+  password_confirmation: "password",
+  role: :admin
+)
 
-#creates two users
-user = FactoryGirl.create :user_with_book
+# creates two users
+user = User.create!(
+  email: "user1@example.com",
+  password: "password",
+  password_confirmation: "password",
+  books: [Book.new(title: "title")]
+)
 
-FactoryGirl.reload
+parent_chapter = Chapter.new(
+    title: "Chapter 0",
+    introtext: "IntroText",
+    fulltext: "FullText",
+    completed: false,
+    death: false,
+    ending: false,
+    beginning: nil,
+    book: nil,
+)
 
-parent_chapter = FactoryGirl.create :chapter_completed
 parent_chapter.book = user.books.first
 parent_chapter.beginning = true
 parent_chapter.save!
 
 12.times do |i|
-
-	chapter = FactoryGirl.create :chapter
-	chapter.book = user.books.first
-	
-	#parent_chapter.fulltext = "[link_to_chapter #{rand(i) - 1}]"
-	parent_chapter.save!
-
-	chapter.save!
-
-	parent_chapter = chapter
+  chapter = Chapter.new(
+    title: "Chapter #{i+1}",
+    introtext: "IntroText",
+    fulltext: "FullText",
+    completed: false,
+    death: false,
+    ending: false,
+    beginning: nil,
+    book: user.books.first,
+  )
+  chapter.save!
+  parent_chapter = chapter
 end
 
-last_chapter = FactoryGirl.create :chapter_completed
-last_chapter.book = user.books.first
-last_chapter.death = last_chapter.ending = true
+last_chapter = Chapter.new(
+    title: "Chapter 13",
+    introtext: "IntroText",
+    fulltext: "FullText",
+    completed: false,
+    death: true,
+    ending: true,
+    beginning: nil,
+    book: user.books.first,
+)
 last_chapter.save!
 
-chapters = Chapter.where(:book => user.books.first)
+chapters = Chapter.where(book: user.books.first)
 
-ct = (2..(chapters.count )).to_a.shuffle 
+(2..(chapters.count)).to_a.shuffle
 
 chapters.each do |chapter|
-	chapter.fulltext = "[link_to_chapter #{rand(chapters.count)}]"
-	#ct.pop
-	chapter.save!
+  chapter.fulltext = "[link_to_chapter #{rand(chapters.count)}]"
+  #ct.pop
+  chapter.save!
 end
 
 2.times do
-	chapter = chapters[rand(chapters.count)]
-	chapter.death = true
-	chapter.save!
+  chapter = chapters[rand(chapters.count)]
+  chapter.death = true
+  chapter.save!
 end
