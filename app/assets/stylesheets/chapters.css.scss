@@ -33,3 +33,11 @@ svg {
 
 .edgeLabel.beginning { fill: #393;}
 .edgeLabel.ending { fill: #f33;}
+
+.node .subtitle text{ font-size:9px;}
+.node rect{
+    &.subtitle{ 
+        fill: #fff;
+        stroke-width:0;
+    }
+}
