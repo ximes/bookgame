@@ -18,7 +18,7 @@ var g = new dagreD3.Digraph();
     #label.concat(" - Active") if chapter.completed? 
     #label.concat(" - Death") if chapter.death?
     %>
-    g.addNode("<%= chapter.id %>", { label: "<%= chapter.title.concat(label) %>", nodeClass: "<%="active " if chapter.completed? %><%="beginning " if chapter.beginning?%><%="death " if chapter.death?%>" });
+    g.addNode("<%= chapter.id %>", { label: "<%= chapter.title.concat(label) %>", subtitle: "<%= strip_tags chapter.introtext %>", nodeClass: "<%="active " if chapter.completed? %><%="beginning " if chapter.beginning?%><%="death " if chapter.death?%>" });
 <%
 end
 
