@@ -69,7 +69,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem "mysql2", "~> 0.3.18"
+gem "pg"
 
 group :production do
   gem "therubyracer"
